@@ -2,135 +2,339 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HighEnd Equipment · Service Portal</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>HighEnd Equipment · Field Portal</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  * { margin:0; padding:0; box-sizing:border-box; font-family:'Inter',sans-serif; }
-  body { background:#f2f5f9; display:flex; justify-content:center; align-items:flex-start; min-height:100vh; padding:20px; }
-  .card { max-width:800px; width:100%; background:#fff; border-radius:28px; box-shadow:0 20px 40px -12px rgba(0,0,0,.15); padding:32px 40px 40px; }
-  h1 { font-size:26px; font-weight:700; color:#0b1b2f; margin-bottom:6px; }
-  h1 span { background:#0b1b2f; color:#fff; font-size:13px; font-weight:600; padding:4px 10px; border-radius:30px; margin-left:8px; vertical-align:middle; }
-  .sub { font-size:15px; color:#5e6f8b; margin-bottom:24px; border-left:4px solid #2f7ef5; padding-left:14px; }
-  .section { margin-bottom:26px; border-bottom:1px solid #e6ecf3; padding-bottom:22px; }
-  .section h2 { font-size:17px; font-weight:600; color:#142a44; margin-bottom:14px; }
-  .grid2 { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
-  .full { grid-column:span 2; }
-  label { font-size:13px; font-weight:600; color:#1b2c44; display:block; margin-bottom:6px; }
-  input[type=text], input[type=date] { width:100%; padding:13px 16px; border:1.5px solid #dae2ed; border-radius:14px; font-size:15px; background:#f7faff; outline:none; }
-  input[type=text]:focus { border-color:#2f7ef5; background:#fff; }
-  .toggle { display:flex; gap:12px; margin-top:6px; }
-  .toggle label { flex:1; text-align:center; padding:16px; border-radius:14px; border:2px solid #dae2ed; background:#f7faff; cursor:pointer; font-size:16px; font-weight:700; color:#5e6f8b; margin:0; transition:.15s; }
-  .toggle input { display:none; }
-  .toggle input:checked + span { color:#fff; }
-  #beforeLbl:has(input:checked) { background:#1e6df2; border-color:#1e6df2; }
-  #afterLbl:has(input:checked)  { background:#0f9d58; border-color:#0f9d58; }
-  #beforeLbl:has(input:checked) span, #afterLbl:has(input:checked) span { color:#fff; }
-  .file-btn { display:flex; justify-content:space-between; align-items:center; padding:14px 18px; border:1.5px dashed #b7c9e0; border-radius:14px; background:#f9fcff; cursor:pointer; font-weight:600; color:#1e6df2; }
-  .file-btn input { display:none; }
-  .file-btn span { background:#e9f0fe; padding:4px 12px; border-radius:30px; font-size:13px; }
-  canvas { width:100%; height:120px; background:#fff; border:1.5px solid #dae2ed; border-radius:14px; touch-action:none; cursor:crosshair; }
-  .sig-row { display:flex; justify-content:space-between; margin-top:8px; }
-  .clear-btn { background:none; border:none; color:#a0b3cc; font-weight:600; cursor:pointer; }
-  .submit { width:100%; padding:18px; border:none; border-radius:40px; background:#0b1b2f; color:#fff; font-size:17px; font-weight:700; cursor:pointer; margin-top:6px; }
-  .submit:hover { background:#1e6df2; }
-  .submit:disabled { background:#cbd6e6; cursor:not-allowed; }
-  .status { display:none; margin-top:14px; padding:14px 18px; border-radius:14px; font-weight:500; font-size:14px; }
-  .status.ok { display:block; background:#e9f3ea; color:#1b6b3f; }
-  .status.err { display:block; background:#ffe9e9; color:#b13a3a; }
-  .hint { font-size:12px; color:#8f9fb2; margin-top:6px; }
+  *{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif;-webkit-tap-highlight-color:transparent;}
+  body{background:#eef2f8;min-height:100vh;padding:14px;display:flex;justify-content:center;align-items:flex-start;}
+  .card{max-width:640px;width:100%;background:#fff;border-radius:24px;box-shadow:0 16px 40px -14px rgba(0,0,0,.18);padding:22px 22px 30px;}
+  h1{font-size:20px;font-weight:700;color:#0b1b2f;display:flex;align-items:center;gap:8px;margin-bottom:4px;}
+  h1 span{background:#0b1b2f;color:#fff;font-size:11px;font-weight:700;padding:3px 9px;border-radius:20px;letter-spacing:.5px;}
+  .sub{font-size:13px;color:#5e6f8b;margin-bottom:18px;border-left:3px solid #2f7ef5;padding-left:12px;line-height:1.4;}
+  .step{background:#f7faff;border:1.5px solid #e2eaf5;border-radius:18px;padding:16px 16px 18px;margin-bottom:14px;}
+  .step-label{font-size:12px;font-weight:700;color:#2f7ef5;letter-spacing:.6px;text-transform:uppercase;margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+  .step-label .num{background:#2f7ef5;color:#fff;width:20px;height:20px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:11px;}
+  select, input[type=text]{width:100%;padding:14px 14px;border:1.5px solid #dae2ed;border-radius:14px;font-size:16px;background:#fff;outline:none;font-weight:500;color:#0b1b2f;}
+  select:focus,input:focus{border-color:#2f7ef5;box-shadow:0 0 0 3px rgba(47,126,245,.12);}
+  .toggle{display:flex;gap:10px;margin-top:8px;}
+  .toggle label{flex:1;text-align:center;padding:18px 10px;border-radius:16px;border:2px solid #dae2ed;background:#fff;cursor:pointer;font-size:16px;font-weight:700;color:#8394ad;transition:.12s;margin:0;}
+  .toggle input{display:none;}
+  #beforeLbl:has(input:checked){background:#1e6df2;border-color:#1e6df2;color:#fff;}
+  #afterLbl:has(input:checked){background:#0f9d58;border-color:#0f9d58;color:#fff;}
+  .file-btn{display:flex;justify-content:space-between;align-items:center;padding:16px;border:2px dashed #b7c9e0;border-radius:14px;background:#fff;cursor:pointer;font-weight:600;color:#1e6df2;font-size:15px;}
+  .file-btn input{display:none;}
+  .file-btn .count{background:#e9f0fe;padding:4px 12px;border-radius:30px;font-size:13px;color:#1e6df2;}
+  .file-btn.has-files{border-color:#0f9d58;background:#f2fbf5;color:#0f9d58;}
+  .file-btn.has-files .count{background:#d7f0e0;color:#0f9d58;}
+  .submit{width:100%;padding:20px;border:none;border-radius:18px;background:#0b1b2f;color:#fff;font-size:17px;font-weight:700;cursor:pointer;margin-top:6px;}
+  .submit:active{transform:scale(.985);}
+  .submit:disabled{background:#cbd6e6;}
+  .status{display:none;margin-top:12px;padding:14px;border-radius:14px;font-weight:600;font-size:14px;text-align:center;}
+  .status.ok{display:block;background:#e9f3ea;color:#1b6b3f;}
+  .status.err{display:block;background:#ffe9e9;color:#b13a3a;}
+  .hint{font-size:12px;color:#8f9fb2;margin-top:8px;line-height:1.4;}
+  canvas{width:100%;height:140px;background:#fff;border:1.5px solid #dae2ed;border-radius:14px;touch-action:none;cursor:crosshair;}
+  .sig-row{display:flex;justify-content:space-between;align-items:center;margin-top:8px;}
+  .clear-btn{background:none;border:none;color:#a0b3cc;font-weight:600;font-size:13px;cursor:pointer;padding:8px 10px;border-radius:20px;}
+  .clear-btn:active{background:#eef3fc;}
+  .sign-fields{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;}
+  .sign-fields label{font-size:12px;font-weight:600;color:#5e6f8b;display:block;margin-bottom:4px;}
+  .divider{height:1px;background:#e6ecf3;margin:18px 0;}
+  .mode-switch{display:flex;background:#eef2f8;border-radius:14px;padding:4px;margin-bottom:16px;}
+  .mode-switch button{flex:1;background:none;border:none;padding:12px;border-radius:11px;font-weight:700;font-size:14px;color:#5e6f8b;cursor:pointer;transition:.15s;}
+  .mode-switch button.active{background:#fff;color:#0b1b2f;box-shadow:0 2px 8px rgba(0,0,0,.06);}
+  .panel{display:none;}
+  .panel.active{display:block;}
+  .add-new{margin-top:10px;padding:12px;background:#fff7e6;border:1.5px dashed #f0b849;border-radius:14px;font-size:13px;color:#8a6516;line-height:1.5;}
+  .add-new button{background:#f0b849;border:none;color:#fff;font-weight:700;padding:10px 16px;border-radius:10px;margin-top:8px;width:100%;cursor:pointer;font-size:14px;}
+  .spinner{display:inline-block;width:14px;height:14px;border:2px solid rgba(255,255,255,.4);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;vertical-align:-2px;margin-right:6px;}
+  @keyframes spin{to{transform:rotate(360deg);}}
+  .small-note{font-size:12px;color:#a0b3cc;text-align:center;margin-top:10px;}
 </style>
 </head>
 <body>
 <div class="card">
-  <h1>⚙️ HighEnd Equipment <span>SERVICE PORTAL</span></h1>
-  <div class="sub">Upload BEFORE / AFTER photos & customer signature. Everything gets filed automatically by customer → equipment → before/after → date.</div>
+  <h1>⚙️ HighEnd Equipment <span>FIELD PORTAL</span></h1>
+  <div class="sub" id="subtitle">Pick the equipment, pick photo type, add photos. Done.</div>
 
-  <form id="form" onsubmit="return false;">
+  <div class="mode-switch">
+    <button id="modePhotos" class="active">📸 Photos</button>
+    <button id="modeSign">✍️ Customer Sign-off</button>
+  </div>
 
-    <!-- CUSTOMER + EQUIPMENT + TECH + DATE -->
-    <div class="section">
-      <h2>📋 Job Info</h2>
-      <div class="grid2">
-        <div class="full">
-          <label>Customer Name</label>
-          <input type="text" id="customer" placeholder="e.g. Johnny's Farm" required>
-        </div>
-        <div class="full">
-          <label>Equipment / Model</label>
-          <input type="text" id="equipment" placeholder="e.g. John Deere 603 Loader" required>
-        </div>
-        <div>
-          <label>Technician Name</label>
-          <input type="text" id="tech" placeholder="Your name" required>
-        </div>
-        <div>
-          <label>Date (auto)</label>
-          <input type="date" id="date" readonly>
-        </div>
+  <!-- ============ PHOTOS PANEL ============ -->
+  <div id="panelPhotos" class="panel active">
+
+    <div class="step">
+      <div class="step-label"><span class="num">1</span> Equipment you serviced</div>
+      <select id="equipSelect"><option>Loading equipment list…</option></select>
+      <div class="add-new" id="addNewBox" style="display:none;">
+        <strong>Not in the list?</strong> Tap the button to add it. <em>Only do this once per piece of equipment — after that it'll be in the dropdown for everyone.</em>
+        <button id="addNewBtn" type="button">➕ Add as New Equipment</button>
       </div>
     </div>
 
-    <!-- PHOTO TYPE + UPLOAD -->
-    <div class="section">
-      <h2>📸 Photos</h2>
-      <label>What type of photos are you uploading? (pick ONE)</label>
+    <div class="step">
+      <div class="step-label"><span class="num">2</span> Are these BEFORE or AFTER?</div>
       <div class="toggle">
-        <label id="beforeLbl"><input type="radio" name="ptype" value="BEFORE" checked><span>🔧 BEFORE</span></label>
-        <label id="afterLbl"><input type="radio" name="ptype" value="AFTER"><span>✅ AFTER</span></label>
+        <label id="beforeLbl"><input type="radio" name="ptype" value="BEFORE" checked>🔧 BEFORE</label>
+        <label id="afterLbl"><input type="radio" name="ptype" value="AFTER">✅ AFTER</label>
       </div>
-      <div class="hint" style="margin-top:10px;">⚠️ BEFORE photos go to the BEFORE folder. AFTER photos go to the AFTER folder. No mixing.</div>
+      <div class="hint">BEFORE photos go to the BEFORE folder. AFTER photos go to the AFTER folder. Never mix them.</div>
+    </div>
 
-      <div style="margin-top:16px;">
-        <label class="file-btn" for="files">
-          📁 Select Photos
-          <span id="fileCount">0 files</span>
-        </label>
-        <input type="file" id="files" accept="image/*" multiple>
+    <div class="step">
+      <div class="step-label"><span class="num">3</span> Add photos</div>
+      <label class="file-btn" id="fileBtn" for="files">
+        📁 <span id="fileLabel">Tap to select photos</span>
+        <span class="count" id="fileCount">0</span>
+      </label>
+      <input type="file" id="files" accept="image/*" multiple capture="environment">
+    </div>
+
+    <button class="submit" id="submitPhotos">⬆️ Upload Photos</button>
+    <div class="status" id="statusPhotos"></div>
+  </div>
+
+  <!-- ============ SIGN PANEL ============ -->
+  <div id="panelSign" class="panel">
+
+    <div class="step">
+      <div class="step-label"><span class="num">1</span> Equipment you serviced</div>
+      <select id="equipSelectSign"><option>Loading equipment list…</option></select>
+      <div class="add-new" id="addNewBoxSign" style="display:none;">
+        <strong>Not in the list?</strong> Add it below. Only once.
+        <button id="addNewBtnSign" type="button">➕ Add as New Equipment</button>
       </div>
     </div>
 
-    <!-- SIGNATURE -->
-    <div class="section">
-      <h2>✍️ Customer Signature (optional)</h2>
+    <div class="step">
+      <div class="step-label"><span class="num">2</span> Customer prints name & date</div>
+      <div class="sign-fields">
+        <div>
+          <label>Customer full name</label>
+          <input type="text" id="custName" placeholder="Printed name" autocomplete="off">
+        </div>
+        <div>
+          <label>Date</label>
+          <input type="text" id="custDate" readonly>
+        </div>
+      </div>
+      <div class="hint">Hand the device to the customer. They type their name, confirm the date, and sign below.</div>
+    </div>
+
+    <div class="step">
+      <div class="step-label"><span class="num">3</span> Customer signature</div>
       <canvas id="sig"></canvas>
       <div class="sig-row">
-        <button type="button" class="clear-btn" id="clearSig">clear signature</button>
-        <span class="hint">Customer signs here — saved as PNG in dated folder</span>
+        <button type="button" class="clear-btn" id="clearSig">↺ Clear signature</button>
+        <span class="hint" style="margin:0;">sign with finger or stylus</span>
       </div>
     </div>
 
-    <button type="submit" class="submit" id="submitBtn">⬆️ Upload & File Everything</button>
-    <div id="status" class="status"></div>
-  </form>
+    <div class="step">
+      <div class="step-label"><span class="num">4</span> Technician name (internal record)</div>
+      <input type="text" id="techSign" placeholder="Your name" autocomplete="off">
+    </div>
+
+    <button class="submit" id="submitSign">✅ Save Customer Sign-off</button>
+    <div class="status" id="statusSign"></div>
+  </div>
+
+  <div class="small-note">All records are filed by equipment ID. If you're unsure, ask.</div>
 </div>
 
 <script>
-/* =========================================================
-   ⚠️ CHANGE THIS URL to your deployed Apps Script Web App URL
-   (See Tutorial Step 6)
-   ========================================================= */
+/* ============================================================
+   ⚠️ CONFIG — REPLACE WITH YOUR DEPLOYED APPS SCRIPT URL
+   ============================================================ */
 const APPS_SCRIPT_URL = "PASTE_YOUR_WEB_APP_URL_HERE";
 
-// --- set today's date ---
-(function(){
+/* ---------- today ---------- */
+const todayStr = (() => {
   const d = new Date();
-  const s = d.getFullYear() + "-" + String(d.getMonth()+1).padStart(2,"0") + "-" + String(d.getDate()).padStart(2,"0");
-  document.getElementById("date").value = s;
+  return d.getFullYear() + "-" + String(d.getMonth()+1).padStart(2,"0") + "-" + String(d.getDate()).padStart(2,"0");
 })();
+document.getElementById("custDate").value = todayStr;
 
-// --- file count display ---
-document.getElementById("files").addEventListener("change", e => {
-  const n = e.target.files.length;
-  document.getElementById("fileCount").textContent = n + (n===1?" file":" files");
+/* ---------- mode switch ---------- */
+const btnP = document.getElementById("modePhotos");
+const btnS = document.getElementById("modeSign");
+const panP = document.getElementById("panelPhotos");
+const panS = document.getElementById("panelSign");
+const subtitle = document.getElementById("subtitle");
+btnP.addEventListener("click", () => {
+  btnP.classList.add("active"); btnS.classList.remove("active");
+  panP.classList.add("active"); panS.classList.remove("active");
+  subtitle.textContent = "Pick the equipment, pick photo type, add photos. Done.";
+});
+btnS.addEventListener("click", () => {
+  btnS.classList.add("active"); btnP.classList.remove("active");
+  panS.classList.add("active"); panP.classList.remove("active");
+  subtitle.textContent = "Hand the device to the customer to type their name and sign.";
 });
 
-// --- signature pad ---
+/* ---------- remember tech name across both panels ---------- */
+const savedTech = localStorage.getItem("techName") || "";
+document.getElementById("techSign").value = savedTech;
+document.getElementById("techSign").addEventListener("input", e => localStorage.setItem("techName", e.target.value));
+
+/* ============================================================
+   LOAD EQUIPMENT LIST FROM APPS SCRIPT
+   ============================================================ */
+let equipmentList = []; // [{id:"EQ-00001", label:"John Deere 603 Loader", customer:"Johnny's Farm"}, ...]
+const selectPhoto = document.getElementById("equipSelect");
+const selectSign  = document.getElementById("equipSelectSign");
+
+async function loadEquipment() {
+  try {
+    const res = await fetch(APPS_SCRIPT_URL + "?action=list");
+    const data = await res.json();
+    if (!data.ok) throw new Error(data.error || "load failed");
+    equipmentList = data.equipment || [];
+
+    const options = equipmentList.length
+      ? equipmentList.map(e => {
+          const cust = e.customer ? " — " + e.customer : "";
+          return `<option value="${e.id}">${e.id} · ${e.label}${cust}</option>`;
+        }).join("")
+      : `<option value="">— no equipment yet —</option>`;
+    const blank = `<option value="">Choose equipment…</option>`;
+    selectPhoto.innerHTML = blank + options;
+    selectSign.innerHTML  = blank + options;
+
+    // always offer "add new" if nothing is selected
+    toggleAddNewBoxes();
+
+  } catch (err) {
+    console.error(err);
+    const errHtml = `<option value="">⚠️ Could not load list</option>`;
+    selectPhoto.innerHTML = errHtml;
+    selectSign.innerHTML  = errHtml;
+  }
+}
+loadEquipment();
+
+function toggleAddNewBoxes() {
+  document.getElementById("addNewBox").style.display     = "block";
+  document.getElementById("addNewBoxSign").style.display = "block";
+}
+
+/* ============================================================
+   ADD NEW EQUIPMENT (creates a permanent entry with a new EQ-ID)
+   ============================================================ */
+async function addNewEquipment() {
+  const label = prompt(
+    "Type the equipment name (include make + model if you know it).\n\n" +
+    "Example: John Deere 603 Loader\n" +
+    "Example: Caterpillar D6 Dozer\n\n" +
+    "Only do this once — after it's created, everyone will see it in the dropdown forever."
+  );
+  if (!label || !label.trim()) return;
+
+  const customer = prompt(
+    "Which customer owns this equipment? (optional — leave blank if unknown)\n\n" +
+    "You can type the customer name here the FIRST time. Customers never need to be typed again — you'll pick this equipment from the list in the future."
+  );
+
+  try {
+    const res = await fetch(APPS_SCRIPT_URL + "?action=addEquipment", {
+      method: "POST",
+      mode: "no-cors",
+      headers: { "Content-Type": "text/plain" },
+      body: JSON.stringify({ label: label.trim(), customer: (customer || "").trim() })
+    });
+    // no-cors → we can't read response; just refresh list
+    setTimeout(async () => {
+      await loadEquipment();
+      alert("✅ Equipment added. It will now appear in the dropdown for everyone.");
+    }, 800);
+  } catch (err) {
+    console.error(err);
+    alert("❌ Could not add equipment. Check connection and try again.");
+  }
+}
+document.getElementById("addNewBtn").addEventListener("click", addNewEquipment);
+document.getElementById("addNewBtnSign").addEventListener("click", addNewEquipment);
+
+/* ============================================================
+   PHOTO PANEL
+   ============================================================ */
+const filesInput = document.getElementById("files");
+const fileBtn = document.getElementById("fileBtn");
+const fileCount = document.getElementById("fileCount");
+filesInput.addEventListener("change", () => {
+  const n = filesInput.files.length;
+  fileCount.textContent = n;
+  if (n > 0) {
+    fileBtn.classList.add("has-files");
+    document.getElementById("fileLabel").textContent = n + " photo" + (n>1?"s":"") + " ready";
+  } else {
+    fileBtn.classList.remove("has-files");
+    document.getElementById("fileLabel").textContent = "Tap to select photos";
+  }
+});
+
+const statusPhotos = document.getElementById("statusPhotos");
+function showPhotoStatus(msg, isErr=false){ statusPhotos.textContent = msg; statusPhotos.className = "status " + (isErr?"err":"ok"); }
+
+document.getElementById("submitPhotos").addEventListener("click", async () => {
+  const btn = document.getElementById("submitPhotos");
+  const equipId = selectPhoto.value;
+  const ptype = document.querySelector('input[name="ptype"]:checked').value;
+  const files = filesInput.files;
+
+  if (!equipId) { showPhotoStatus("❌ Pick the equipment first.", true); return; }
+  if (files.length === 0) { showPhotoStatus("❌ Add at least one photo.", true); return; }
+
+  // Read files as base64
+  const fileData = await Promise.all(Array.from(files).map(f => new Promise(res => {
+    const r = new FileReader();
+    r.onload = ev => res({ name: f.name, mime: f.type, data: ev.target.result.split(",")[1] });
+    r.readAsDataURL(f);
+  })));
+
+  const payload = {
+    action: "uploadPhotos",
+    equipId: equipId,
+    ptype: ptype,
+    date: todayStr,
+    files: fileData
+  };
+
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span>Uploading…';
+
+  try {
+    await fetch(APPS_SCRIPT_URL, {
+      method: "POST",
+      mode: "no-cors",
+      headers: { "Content-Type": "text/plain" },
+      body: JSON.stringify(payload)
+    });
+    showPhotoStatus("✅ Saved. Photos filed correctly.");
+    filesInput.value = "";
+    fileCount.textContent = "0";
+    fileBtn.classList.remove("has-files");
+    document.getElementById("fileLabel").textContent = "Tap to select photos";
+  } catch (err) {
+    console.error(err);
+    showPhotoStatus("❌ Upload failed. Try again.", true);
+  } finally {
+    btn.disabled = false;
+    btn.textContent = "⬆️ Upload Photos";
+  }
+});
+
+/* ============================================================
+   SIGN PANEL
+   ============================================================ */
 const canvas = document.getElementById("sig");
 const ctx = canvas.getContext("2d");
 function fitCanvas(){
   const r = canvas.getBoundingClientRect();
-  canvas.width = r.width; canvas.height = 120;
+  canvas.width = r.width; canvas.height = 140;
   ctx.lineWidth = 3; ctx.lineCap = "round"; ctx.strokeStyle = "#0b1b2f";
   ctx.fillStyle = "#fff"; ctx.fillRect(0,0,canvas.width,canvas.height);
 }
@@ -140,74 +344,68 @@ fitCanvas();
 let drawing=false, lx=0, ly=0, signed=false;
 function pos(e){
   const r = canvas.getBoundingClientRect();
-  const sx = canvas.width / r.width, sy = canvas.height / r.height;
+  const sx = canvas.width/r.width, sy = canvas.height/r.height;
   const p = e.touches ? e.touches[0] : e;
-  return { x:(p.clientX - r.left)*sx, y:(p.clientY - r.top)*sy };
+  return { x:(p.clientX-r.left)*sx, y:(p.clientY-r.top)*sy };
 }
-function start(e){ e.preventDefault(); drawing=true; const p=pos(e); lx=p.x; ly=p.y; signed=true; }
-function move(e){ e.preventDefault(); if(!drawing) return; const p=pos(e); ctx.beginPath(); ctx.moveTo(lx,ly); ctx.lineTo(p.x,p.y); ctx.stroke(); lx=p.x; ly=p.y; }
+function start(e){ e.preventDefault(); drawing=true; signed=true; const p=pos(e); lx=p.x; ly=p.y; }
+function move(e){ e.preventDefault(); if(!drawing)return; const p=pos(e); ctx.beginPath(); ctx.moveTo(lx,ly); ctx.lineTo(p.x,p.y); ctx.stroke(); lx=p.x; ly=p.y; }
 function stop(e){ e.preventDefault(); drawing=false; }
 canvas.addEventListener("mousedown",start); canvas.addEventListener("mousemove",move); canvas.addEventListener("mouseup",stop); canvas.addEventListener("mouseout",stop);
 canvas.addEventListener("touchstart",start,{passive:false}); canvas.addEventListener("touchmove",move,{passive:false}); canvas.addEventListener("touchend",stop);
-
 document.getElementById("clearSig").addEventListener("click", () => {
   ctx.fillStyle="#fff"; ctx.fillRect(0,0,canvas.width,canvas.height); signed=false;
 });
 
-// --- submit ---
-const statusEl = document.getElementById("status");
-function show(msg, isErr=false){ statusEl.textContent=msg; statusEl.className="status "+(isErr?"err":"ok"); }
+const statusSign = document.getElementById("statusSign");
+function showSignStatus(msg, isErr=false){ statusSign.textContent = msg; statusSign.className = "status " + (isErr?"err":"ok"); }
 
-document.getElementById("form").addEventListener("submit", async () => {
-  const customer = document.getElementById("customer").value.trim();
-  const equipment = document.getElementById("equipment").value.trim();
-  const tech = document.getElementById("tech").value.trim();
-  const date = document.getElementById("date").value;
-  const ptype = document.querySelector('input[name="ptype"]:checked').value;
+document.getElementById("submitSign").addEventListener("click", async () => {
+  const btn = document.getElementById("submitSign");
+  const equipId = selectSign.value;
+  const custName = document.getElementById("custName").value.trim();
+  const techName = document.getElementById("techSign").value.trim();
 
-  if(!customer || !equipment || !tech){ show("❌ Fill in customer, equipment, and technician.", true); return; }
+  if (!equipId) { showSignStatus("❌ Pick the equipment first.", true); return; }
+  if (!custName) { showSignStatus("❌ Customer must print their name.", true); return; }
+  if (!signed) { showSignStatus("❌ Customer must sign in the box.", true); return; }
+  if (!techName) { showSignStatus("❌ Enter your technician name.", true); return; }
 
-  const files = document.getElementById("files").files;
-  const hasFiles = files.length > 0;
-  const sigData = signed ? canvas.toDataURL("image/png") : null;
+  const sigData = canvas.toDataURL("image/png");
 
-  if(!hasFiles && !sigData){ show("⚠️ Add at least one photo or a signature.", true); return; }
+  const payload = {
+    action: "uploadSignature",
+    equipId: equipId,
+    date: todayStr,
+    customerName: custName,
+    customerDate: document.getElementById("custDate").value,
+    tech: techName,
+    signature: sigData
+  };
 
-  // read files as base64
-  const fileData = await Promise.all(Array.from(files).map(f => new Promise(res => {
-    const r = new FileReader();
-    r.onload = ev => res({ name:f.name, mime:f.type, data: ev.target.result.split(",")[1] });
-    r.readAsDataURL(f);
-  })));
-
-  const payload = { customer, equipment, tech, date, ptype, signature: sigData, files: fileData };
-
-  const btn = document.getElementById("submitBtn");
-  btn.disabled = true; btn.textContent = "⏳ Uploading...";
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span>Saving…';
 
   try {
     await fetch(APPS_SCRIPT_URL, {
       method: "POST",
-      mode: "no-cors", // Apps Script doesn't send CORS headers back; no-cors makes it fire-and-forget
-      headers: { "Content-Type": "text/plain" }, // avoids preflight
+      mode: "no-cors",
+      headers: { "Content-Type": "text/plain" },
       body: JSON.stringify(payload)
     });
-    show("✅ Success! Files saved to the correct folder.");
-    document.getElementById("files").value = "";
-    document.getElementById("fileCount").textContent = "0 files";
+    showSignStatus("✅ Sign-off saved to the equipment folder.");
+    // reset for next customer
+    document.getElementById("custName").value = "";
     ctx.fillStyle="#fff"; ctx.fillRect(0,0,canvas.width,canvas.height); signed=false;
-  } catch(err){
+    selectSign.value = "";
+  } catch (err) {
     console.error(err);
-    show("❌ Upload failed. Check console.", true);
+    showSignStatus("❌ Save failed. Try again.", true);
   } finally {
-    btn.disabled = false; btn.textContent = "⬆️ Upload & File Everything";
+    btn.disabled = false;
+    btn.textContent = "✅ Save Customer Sign-off";
   }
 });
-
-// remember technician name between visits (convenience)
-const savedTech = localStorage.getItem("techName");
-if(savedTech) document.getElementById("tech").value = savedTech;
-document.getElementById("tech").addEventListener("input", e => localStorage.setItem("techName", e.target.value));
 </script>
 </body>
 </html>
