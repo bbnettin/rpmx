@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HighEnd Equipment · Service Portal</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; font-family:'Inter',sans-serif; }
+  body { background:#f2f5f9; display:flex; justify-content:center; align-items:flex-start; min-height:100vh; padding:20px; }
+  .card { max-width:800px; width:100%; background:#fff; border-radius:28px; box-shadow:0 20px 40px -12px rgba(0,0,0,.15); padding:32px 40px 40px; }
+  h1 { font-size:26px; font-weight:700; color:#0b1b2f; margin-bottom:6px; }
+  h1 span { background:#0b1b2f; color:#fff; font-size:13px; font-weight:600; padding:4px 10px; border-radius:30px; margin-left:8px; vertical-align:middle; }
+  .sub { font-size:15px; color:#5e6f8b; margin-bottom:24px; border-left:4px solid #2f7ef5; padding-left:14px; }
+  .section { margin-bottom:26px; border-bottom:1px solid #e6ecf3; padding-bottom:22px; }
+  .section h2 { font-size:17px; font-weight:600; color:#142a44; margin-bottom:14px; }
+  .grid2 { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  .full { grid-column:span 2; }
+  label { font-size:13px; font-weight:600; color:#1b2c44; display:block; margin-bottom:6px; }
+  input[type=text], input[type=date] { width:100%; padding:13px 16px; border:1.5px solid #dae2ed; border-radius:14px; font-size:15px; background:#f7faff; outline:none; }
+  input[type=text]:focus { border-color:#2f7ef5; background:#fff; }
+  .toggle { display:flex; gap:12px; margin-top:6px; }
+  .toggle label { flex:1; text-align:center; padding:16px; border-radius:14px; border:2px solid #dae2ed; background:#f7faff; cursor:pointer; font-size:16px; font-weight:700; color:#5e6f8b; margin:0; transition:.15s; }
+  .toggle input { display:none; }
+  .toggle input:checked + span { color:#fff; }
+  #beforeLbl:has(input:checked) { background:#1e6df2; border-color:#1e6df2; }
+  #afterLbl:has(input:checked)  { background:#0f9d58; border-color:#0f9d58; }
+  #beforeLbl:has(input:checked) span, #afterLbl:has(input:checked) span { color:#fff; }
+  .file-btn { display:flex; justify-content:space-between; align-items:center; padding:14px 18px; border:1.5px dashed #b7c9e0; border-radius:14px; background:#f9fcff; cursor:pointer; font-weight:600; color:#1e6df2; }
+  .file-btn input { display:none; }
+  .file-btn span { background:#e9f0fe; padding:4px 12px; border-radius:30px; font-size:13px; }
+  canvas { width:100%; height:120px; background:#fff; border:1.5px solid #dae2ed; border-radius:14px; touch-action:none; cursor:crosshair; }
+  .sig-row { display:flex; justify-content:space-between; margin-top:8px; }
+  .clear-btn { background:none; border:none; color:#a0b3cc; font-weight:600; cursor:pointer; }
+  .submit { width:100%; padding:18px; border:none; border-radius:40px; background:#0b1b2f; color:#fff; font-size:17px; font-weight:700; cursor:pointer; margin-top:6px; }
+  .submit:hover { background:#1e6df2; }
+  .submit:disabled { background:#cbd6e6; cursor:not-allowed; }
+  .status { display:none; margin-top:14px; padding:14px 18px; border-radius:14px; font-weight:500; font-size:14px; }
+  .status.ok { display:block; background:#e9f3ea; color:#1b6b3f; }
+  .status.err { display:block; background:#ffe9e9; color:#b13a3a; }
+  .hint { font-size:12px; color:#8f9fb2; margin-top:6px; }
+</style>
+</head>
+<body>
+<div class="card">
+  <h1>⚙️ HighEnd Equipment <span>SERVICE PORTAL</span></h1>
+  <div class="sub">Upload BEFORE / AFTER photos & customer signature. Everything gets filed automatically by customer → equipment → before/after → date.</div>
+
+  <form id="form" onsubmit="return false;">
+
+    <!-- CUSTOMER + EQUIPMENT + TECH + DATE -->
+    <div class="section">
+      <h2>📋 Job Info</h2>
+      <div class="grid2">
+        <div class="full">
+          <label>Customer Name</label>
+          <input type="text" id="customer" placeholder="e.g. Johnny's Farm" required>
+        </div>
+        <div class="full">
+          <label>Equipment / Model</label>
+          <input type="text" id="equipment" placeholder="e.g. John Deere 603 Loader" required>
+        </div>
+        <div>
+          <label>Technician Name</label>
+          <input type="text" id="tech" placeholder="Your name" required>
+        </div>
+        <div>
+          <label>Date (auto)</label>
+          <input type="date" id="date" readonly>
+        </div>
+      </div>
+    </div>
+
+    <!-- PHOTO TYPE + UPLOAD -->
+    <div class="section">
+      <h2>📸 Photos</h2>
+      <label>What type of photos are you uploading? (pick ONE)</label>
+      <div class="toggle">
+        <label id="beforeLbl"><input type="radio" name="ptype" value="BEFORE" checked><span>🔧 BEFORE</span></label>
+        <label id="afterLbl"><input type="radio" name="ptype" value="AFTER"><span>✅ AFTER</span></label>
+      </div>
+      <div class="hint" style="margin-top:10px;">⚠️ BEFORE photos go to the BEFORE folder. AFTER photos go to the AFTER folder. No mixing.</div>
+
+      <div style="margin-top:16px;">
+        <label class="file-btn" for="files">
+          📁 Select Photos
+          <span id="fileCount">0 files</span>
+        </label>
+        <input type="file" id="files" accept="image/*" multiple>
+      </div>
+    </div>
+
+    <!-- SIGNATURE -->
+    <div class="section">
+      <h2>✍️ Customer Signature (optional)</h2>
+      <canvas id="sig"></canvas>
+      <div class="sig-row">
+        <button type="button" class="clear-btn" id="clearSig">clear signature</button>
+        <span class="hint">Customer signs here — saved as PNG in dated folder</span>
+      </div>
+    </div>
+
+    <button type="submit" class="submit" id="submitBtn">⬆️ Upload & File Everything</button>
+    <div id="status" class="status"></div>
+  </form>
+</div>
+
+<script>
+/* =========================================================
+   ⚠️ CHANGE THIS URL to your deployed Apps Script Web App URL
+   (See Tutorial Step 6)
+   ========================================================= */
+const APPS_SCRIPT_URL = "PASTE_YOUR_WEB_APP_URL_HERE";
+
+// --- set today's date ---
+(function(){
+  const d = new Date();
+  const s = d.getFullYear() + "-" + String(d.getMonth()+1).padStart(2,"0") + "-" + String(d.getDate()).padStart(2,"0");
+  document.getElementById("date").value = s;
+})();
+
+// --- file count display ---
+document.getElementById("files").addEventListener("change", e => {
+  const n = e.target.files.length;
+  document.getElementById("fileCount").textContent = n + (n===1?" file":" files");
+});
+
+// --- signature pad ---
+const canvas = document.getElementById("sig");
+const ctx = canvas.getContext("2d");
+function fitCanvas(){
+  const r = canvas.getBoundingClientRect();
+  canvas.width = r.width; canvas.height = 120;
+  ctx.lineWidth = 3; ctx.lineCap = "round"; ctx.strokeStyle = "#0b1b2f";
+  ctx.fillStyle = "#fff"; ctx.fillRect(0,0,canvas.width,canvas.height);
+}
+window.addEventListener("resize", fitCanvas);
+fitCanvas();
+
+let drawing=false, lx=0, ly=0, signed=false;
+function pos(e){
+  const r = canvas.getBoundingClientRect();
+  const sx = canvas.width / r.width, sy = canvas.height / r.height;
+  const p = e.touches ? e.touches[0] : e;
+  return { x:(p.clientX - r.left)*sx, y:(p.clientY - r.top)*sy };
+}
+function start(e){ e.preventDefault(); drawing=true; const p=pos(e); lx=p.x; ly=p.y; signed=true; }
+function move(e){ e.preventDefault(); if(!drawing) return; const p=pos(e); ctx.beginPath(); ctx.moveTo(lx,ly); ctx.lineTo(p.x,p.y); ctx.stroke(); lx=p.x; ly=p.y; }
+function stop(e){ e.preventDefault(); drawing=false; }
+canvas.addEventListener("mousedown",start); canvas.addEventListener("mousemove",move); canvas.addEventListener("mouseup",stop); canvas.addEventListener("mouseout",stop);
+canvas.addEventListener("touchstart",start,{passive:false}); canvas.addEventListener("touchmove",move,{passive:false}); canvas.addEventListener("touchend",stop);
+
+document.getElementById("clearSig").addEventListener("click", () => {
+  ctx.fillStyle="#fff"; ctx.fillRect(0,0,canvas.width,canvas.height); signed=false;
+});
+
+// --- submit ---
+const statusEl = document.getElementById("status");
+function show(msg, isErr=false){ statusEl.textContent=msg; statusEl.className="status "+(isErr?"err":"ok"); }
+
+document.getElementById("form").addEventListener("submit", async () => {
+  const customer = document.getElementById("customer").value.trim();
+  const equipment = document.getElementById("equipment").value.trim();
+  const tech = document.getElementById("tech").value.trim();
+  const date = document.getElementById("date").value;
+  const ptype = document.querySelector('input[name="ptype"]:checked').value;
+
+  if(!customer || !equipment || !tech){ show("❌ Fill in customer, equipment, and technician.", true); return; }
+
+  const files = document.getElementById("files").files;
+  const hasFiles = files.length > 0;
+  const sigData = signed ? canvas.toDataURL("image/png") : null;
+
+  if(!hasFiles && !sigData){ show("⚠️ Add at least one photo or a signature.", true); return; }
+
+  // read files as base64
+  const fileData = await Promise.all(Array.from(files).map(f => new Promise(res => {
+    const r = new FileReader();
+    r.onload = ev => res({ name:f.name, mime:f.type, data: ev.target.result.split(",")[1] });
+    r.readAsDataURL(f);
+  })));
+
+  const payload = { customer, equipment, tech, date, ptype, signature: sigData, files: fileData };
+
+  const btn = document.getElementById("submitBtn");
+  btn.disabled = true; btn.textContent = "⏳ Uploading...";
+
+  try {
+    await fetch(APPS_SCRIPT_URL, {
+      method: "POST",
+      mode: "no-cors", // Apps Script doesn't send CORS headers back; no-cors makes it fire-and-forget
+      headers: { "Content-Type": "text/plain" }, // avoids preflight
+      body: JSON.stringify(payload)
+    });
+    show("✅ Success! Files saved to the correct folder.");
+    document.getElementById("files").value = "";
+    document.getElementById("fileCount").textContent = "0 files";
+    ctx.fillStyle="#fff"; ctx.fillRect(0,0,canvas.width,canvas.height); signed=false;
+  } catch(err){
+    console.error(err);
+    show("❌ Upload failed. Check console.", true);
+  } finally {
+    btn.disabled = false; btn.textContent = "⬆️ Upload & File Everything";
+  }
+});
+
+// remember technician name between visits (convenience)
+const savedTech = localStorage.getItem("techName");
+if(savedTech) document.getElementById("tech").value = savedTech;
+document.getElementById("tech").addEventListener("input", e => localStorage.setItem("techName", e.target.value));
+</script>
+</body>
+</html>
