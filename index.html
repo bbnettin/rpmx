@@ -16,7 +16,6 @@
   .step-label{font-size:12px;font-weight:700;color:#2f7ef5;letter-spacing:.6px;text-transform:uppercase;margin-bottom:10px;display:flex;align-items:center;gap:8px;}
   .step-label .num{background:#2f7ef5;color:#fff;width:20px;height:20px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:11px;}
 
-  /* ============ SEARCH PICKER ============ */
   .picker{position:relative;}
   .picker input{width:100%;padding:16px 44px 16px 14px;border:1.5px solid #dae2ed;border-radius:14px;font-size:16px;background:#fff;outline:none;font-weight:500;color:#0b1b2f;}
   .picker input:focus{border-color:#2f7ef5;box-shadow:0 0 0 3px rgba(47,126,245,.12);}
@@ -44,11 +43,13 @@
   .toggle input{display:none;}
   #beforeLbl:has(input:checked){background:#1e6df2;border-color:#1e6df2;color:#fff;}
   #afterLbl:has(input:checked){background:#0f9d58;border-color:#0f9d58;color:#fff;}
+
   .file-btn{display:flex;justify-content:space-between;align-items:center;padding:16px;border:2px dashed #b7c9e0;border-radius:14px;background:#fff;cursor:pointer;font-weight:600;color:#1e6df2;font-size:15px;}
   .file-btn input{display:none;}
   .file-btn .count{background:#e9f0fe;padding:4px 12px;border-radius:30px;font-size:13px;color:#1e6df2;}
   .file-btn.has-files{border-color:#0f9d58;background:#f2fbf5;color:#0f9d58;}
   .file-btn.has-files .count{background:#d7f0e0;color:#0f9d58;}
+
   .submit{width:100%;padding:20px;border:none;border-radius:18px;background:#0b1b2f;color:#fff;font-size:17px;font-weight:700;cursor:pointer;margin-top:6px;}
   .submit:active{transform:scale(.985);}
   .submit:disabled{background:#cbd6e6;}
@@ -56,7 +57,8 @@
   .status.ok{display:block;background:#e9f3ea;color:#1b6b3f;}
   .status.err{display:block;background:#ffe9e9;color:#b13a3a;}
   .hint{font-size:12px;color:#8f9fb2;margin-top:8px;line-height:1.4;}
-  canvas{width:100%;height:140px;background:#fff;border:1.5px solid #dae2ed;border-radius:14px;touch-action:none;cursor:crosshair;}
+
+  canvas{width:100%;height:140px;background:#fff;border:1.5px solid #dae2ed;border-radius:14px;touch-action:none;cursor:crosshair;display:block;}
   .sig-row{display:flex;justify-content:space-between;align-items:center;margin-top:8px;}
   .clear-btn{background:none;border:none;color:#a0b3cc;font-weight:600;font-size:13px;cursor:pointer;padding:8px 10px;border-radius:20px;}
   .clear-btn:active{background:#eef3fc;}
@@ -64,6 +66,22 @@
   .sign-fields label{font-size:12px;font-weight:600;color:#5e6f8b;display:block;margin-bottom:4px;}
   .sign-fields input{width:100%;padding:14px;border:1.5px solid #dae2ed;border-radius:14px;font-size:15px;background:#fff;outline:none;font-weight:500;}
   .sign-fields input:focus{border-color:#2f7ef5;}
+
+  .text-input{width:100%;padding:14px;border:1.5px solid #dae2ed;border-radius:14px;font-size:15px;background:#fff;outline:none;font-weight:500;color:#0b1b2f;}
+  .text-input:focus{border-color:#2f7ef5;box-shadow:0 0 0 3px rgba(47,126,245,.12);}
+
+  .coworkers-box{background:#fff;border:1.5px solid #dae2ed;border-radius:14px;padding:12px 14px;margin-top:8px;}
+  .coworkers-box .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;}
+  .coworkers-box .chip{background:#e9f0fe;color:#1e6df2;font-size:13px;font-weight:700;padding:6px 10px;border-radius:20px;display:flex;align-items:center;gap:6px;}
+  .coworkers-box .chip button{background:none;border:none;color:#1e6df2;font-weight:700;cursor:pointer;font-size:14px;line-height:1;}
+  .coworkers-box .add-row{display:flex;gap:8px;margin-top:10px;}
+  .coworkers-box .add-row input{flex:1;padding:12px;border:1.5px solid #dae2ed;border-radius:12px;font-size:14px;outline:none;font-weight:500;}
+  .coworkers-box .add-row button{padding:12px 16px;border:none;border-radius:12px;background:#1e6df2;color:#fff;font-weight:700;font-size:14px;cursor:pointer;}
+
+  .folder-preview{background:#f4fbf6;border:1.5px solid #c9e6d4;border-radius:12px;padding:12px 14px;margin-top:12px;font-size:13px;color:#0b5a30;line-height:1.5;display:none;}
+  .folder-preview.show{display:block;}
+  .folder-preview code{background:#fff;padding:2px 6px;border-radius:6px;font-weight:700;color:#0b1b2f;font-size:12px;}
+
   .mode-switch{display:flex;background:#eef2f8;border-radius:14px;padding:4px;margin-bottom:16px;}
   .mode-switch button{flex:1;background:none;border:none;padding:12px;border-radius:11px;font-weight:700;font-size:14px;color:#5e6f8b;cursor:pointer;transition:.15s;}
   .mode-switch button.active{background:#fff;color:#0b1b2f;box-shadow:0 2px 8px rgba(0,0,0,.06);}
@@ -76,7 +94,6 @@
   .chosen-summary.show{display:block;}
   .chosen-summary strong{color:#0b1b2f;}
 
-  /* Similar-item warning modal */
   .modal-backdrop{position:fixed;inset:0;background:rgba(11,27,47,.55);display:none;align-items:center;justify-content:center;padding:20px;z-index:100;}
   .modal-backdrop.show{display:flex;}
   .modal{background:#fff;border-radius:22px;max-width:480px;width:100%;padding:24px;max-height:80vh;overflow-y:auto;}
@@ -96,7 +113,7 @@
 <body>
 <div class="card">
   <h1>⚙️ HighEnd Equipment <span>FIELD PORTAL</span></h1>
-  <div class="sub" id="subtitle">Search the equipment, pick BEFORE or AFTER, add photos. Done.</div>
+  <div class="sub" id="subtitle">Search the equipment, pick BEFORE or AFTER, add your name and photos. Done.</div>
 
   <div class="mode-switch">
     <button id="modePhotos" class="active">📸 Photos</button>
@@ -125,7 +142,25 @@
     </div>
 
     <div class="step">
-      <div class="step-label"><span class="num">3</span> Add photos</div>
+      <div class="step-label"><span class="num">3</span> Who is on this job?</div>
+      <div>
+        <label style="font-size:12px;font-weight:600;color:#5e6f8b;display:block;margin-bottom:4px;">Your name (required)</label>
+        <input type="text" id="techLeadPhoto" class="text-input" placeholder="Your full name" autocomplete="off">
+      </div>
+      <div class="coworkers-box">
+        <div style="font-size:12px;font-weight:600;color:#5e6f8b;">Additional techs on this job (optional)</div>
+        <div class="chips" id="coworkerChipsPhoto"></div>
+        <div class="add-row">
+          <input type="text" id="coworkerInputPhoto" placeholder="e.g. Dave" autocomplete="off">
+          <button type="button" id="addCoworkerPhoto">Add</button>
+        </div>
+        <div class="hint">Add each tech working with you today. Their names go in the folder name.</div>
+      </div>
+      <div class="folder-preview" id="folderPreviewPhoto"></div>
+    </div>
+
+    <div class="step">
+      <div class="step-label"><span class="num">4</span> Add photos</div>
       <label class="file-btn" id="fileBtn" for="files">
         📁 <span id="fileLabel">Tap to select photos</span>
         <span class="count" id="fileCount">0</span>
@@ -174,15 +209,28 @@
     </div>
 
     <div class="step">
-      <div class="step-label"><span class="num">4</span> Technician name</div>
-      <input type="text" id="techSign" placeholder="Your name" autocomplete="off" style="width:100%;padding:14px;border:1.5px solid #dae2ed;border-radius:14px;font-size:15px;background:#fff;outline:none;font-weight:500;">
+      <div class="step-label"><span class="num">4</span> Who is on this job?</div>
+      <div>
+        <label style="font-size:12px;font-weight:600;color:#5e6f8b;display:block;margin-bottom:4px;">Your name (required)</label>
+        <input type="text" id="techLeadSign" class="text-input" placeholder="Your full name" autocomplete="off">
+      </div>
+      <div class="coworkers-box">
+        <div style="font-size:12px;font-weight:600;color:#5e6f8b;">Additional techs on this job (optional)</div>
+        <div class="chips" id="coworkerChipsSign"></div>
+        <div class="add-row">
+          <input type="text" id="coworkerInputSign" placeholder="e.g. Dave" autocomplete="off">
+          <button type="button" id="addCoworkerSign">Add</button>
+        </div>
+        <div class="hint">Their names go in the signature folder name.</div>
+      </div>
+      <div class="folder-preview" id="folderPreviewSign"></div>
     </div>
 
     <button class="submit" id="submitSign">✅ Save Customer Sign-off</button>
     <div class="status" id="statusSign"></div>
   </div>
 
-  <div class="small-note">Equipment is filed by permanent ID. Every upload is date-stamped.</div>
+  <div class="small-note">Equipment is filed by permanent ID. Every folder is date + tech-name stamped.</div>
 </div>
 
 <!-- Similar-item warning modal -->
@@ -219,7 +267,7 @@ const subtitle = document.getElementById("subtitle");
 btnP.addEventListener("click", () => {
   btnP.classList.add("active"); btnS.classList.remove("active");
   panP.classList.add("active"); panS.classList.remove("active");
-  subtitle.textContent = "Search the equipment, pick BEFORE or AFTER, add photos. Done.";
+  subtitle.textContent = "Search the equipment, pick BEFORE or AFTER, add your name and photos. Done.";
 });
 btnS.addEventListener("click", () => {
   btnS.classList.add("active"); btnP.classList.remove("active");
@@ -227,16 +275,25 @@ btnS.addEventListener("click", () => {
   subtitle.textContent = "Hand the device to the customer to type their name and sign.";
 });
 
-/* ---------- remember tech name ---------- */
+/* ---------- remember tech name across both panels ---------- */
 const savedTech = localStorage.getItem("techName") || "";
-document.getElementById("techSign").value = savedTech;
-document.getElementById("techSign").addEventListener("input", e => localStorage.setItem("techName", e.target.value));
+document.getElementById("techLeadPhoto").value = savedTech;
+document.getElementById("techLeadSign").value  = savedTech;
+function persistTech(val) {
+  localStorage.setItem("techName", val);
+  // keep both fields in sync as the tech types in either panel
+  document.getElementById("techLeadPhoto").value = val;
+  document.getElementById("techLeadSign").value  = val;
+  updateFolderPreviews();
+}
+document.getElementById("techLeadPhoto").addEventListener("input", e => persistTech(e.target.value));
+document.getElementById("techLeadSign").addEventListener("input",  e => persistTech(e.target.value));
 
 /* ============================================================
    EQUIPMENT CACHE + RECENTS
    ============================================================ */
-let equipmentList = []; // [{id, label, customer, folder, created}]
-const RECENTS_KEY = "recentEquipmentIds"; // per-device, per-tech recents
+let equipmentList = [];
+const RECENTS_KEY = "recentEquipmentIds";
 const MAX_RECENTS = 8;
 
 function getRecentIds() {
@@ -246,8 +303,7 @@ function getRecentIds() {
 function pushRecentId(id) {
   let arr = getRecentIds().filter(x => x !== id);
   arr.unshift(id);
-  arr = arr.slice(0, MAX_RECENTS);
-  localStorage.setItem(RECENTS_KEY, JSON.stringify(arr));
+  localStorage.setItem(RECENTS_KEY, JSON.stringify(arr.slice(0, MAX_RECENTS)));
 }
 
 async function loadEquipment() {
@@ -260,17 +316,16 @@ async function loadEquipment() {
     console.error("loadEquipment failed:", err);
     equipmentList = [];
   }
-  // refresh any active picker's results
-  if (document.getElementById("resultsPhoto").classList.contains("show")) renderResults_photo();
-  if (document.getElementById("resultsSign").classList.contains("show")) renderResults_sign();
+  if (document.getElementById("resultsPhoto").classList.contains("show")) renderResultsFor_("photo");
+  if (document.getElementById("resultsSign").classList.contains("show"))  renderResultsFor_("sign");
 }
 loadEquipment();
 
 /* ============================================================
-   SEARCH PICKER — replaces the dropdown
+   SHARED PICKER STATE
    ============================================================ */
 const pickerState = {
-  photo: { selected: null }, // {id, label, customer}
+  photo: { selected: null },
   sign:  { selected: null }
 };
 
@@ -286,7 +341,6 @@ function renderResultsFor_(which) {
   const q = inputEl.value.trim();
   const matches = equipmentList.filter(e => matchesQuery_(e, q));
 
-  // "My Recent" section — shown when input is empty (or before typing) and user has recents
   const recentIds = getRecentIds();
   const recentItems = recentIds
     .map(id => equipmentList.find(e => e.id === id))
@@ -297,13 +351,9 @@ function renderResultsFor_(which) {
 
   if (!q && recentItems.length > 0) {
     html += `<div class="group-label">⭐ My Recent</div>`;
-    recentItems.slice(0, 5).forEach(e => {
-      html += resultRowHTML_(e);
-    });
-    const otherCount = equipmentList.length - recentItems.filter(r => equipmentList.some(x => x.id === r.id)).length;
+    recentItems.slice(0, 5).forEach(e => { html += resultRowHTML_(e); });
     if (equipmentList.length > recentItems.length) {
       html += `<div class="group-label">All Equipment (type to search)</div>`;
-      // show first 5 alphabetical
       equipmentList.slice().sort((a,b)=>a.label.localeCompare(b.label)).slice(0,5).forEach(e => {
         html += resultRowHTML_(e);
       });
@@ -316,7 +366,6 @@ function renderResultsFor_(which) {
     html += `<div class="empty">No matches for "<strong>${escapeHTML_(q)}</strong>"<br><small>Use the button below to add it.</small></div>`;
   }
 
-  // Always append "Add as new"
   html += `
     <div class="add-inline" data-action="add">
       <div class="plus">+</div>
@@ -329,12 +378,11 @@ function renderResultsFor_(which) {
   resultsEl.innerHTML = html;
   resultsEl.classList.add("show");
 
-  // wire result rows
   resultsEl.querySelectorAll(".result").forEach(el => {
     el.addEventListener("click", () => chooseEquipment_(which, el.dataset.id));
   });
   resultsEl.querySelector('[data-action="add"]').addEventListener("click", () => {
-    openAddNew_(q);
+    openAddNew_(q, which);
   });
 }
 
@@ -375,7 +423,6 @@ function clearChosen_(which) {
   summaryEl.classList.remove("show");
 }
 
-// Photo picker wiring
 const searchPhoto = document.getElementById("searchPhoto");
 const resultsPhoto = document.getElementById("resultsPhoto");
 searchPhoto.addEventListener("focus", () => renderResultsFor_("photo"));
@@ -383,7 +430,7 @@ searchPhoto.addEventListener("input", () => {
   if (pickerState.photo.selected) clearChosen_("photo");
   renderResultsFor_("photo");
 });
-// Sign picker wiring
+
 const searchSign = document.getElementById("searchSign");
 const resultsSign = document.getElementById("resultsSign");
 searchSign.addEventListener("focus", () => renderResultsFor_("sign"));
@@ -391,7 +438,7 @@ searchSign.addEventListener("input", () => {
   if (pickerState.sign.selected) clearChosen_("sign");
   renderResultsFor_("sign");
 });
-// Hide when tapping outside
+
 document.addEventListener("click", (e) => {
   ["photo","sign"].forEach(which => {
     const pickerEl = document.getElementById(which === "photo" ? "pickerPhoto" : "pickerSign");
@@ -400,15 +447,97 @@ document.addEventListener("click", (e) => {
   });
 });
 
-function renderResults_photo(){ renderResultsFor_("photo"); }
-function renderResults_sign(){  renderResultsFor_("sign"); }
+/* ============================================================
+   COWORKERS (chips)
+   ============================================================ */
+const coworkers = { photo: [], sign: [] };
+
+function slugifyName_(name) {
+  return String(name || "")
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+    .substring(0, 40);
+}
+
+function buildFolderTag_(which) {
+  const lead = document.getElementById(which === "photo" ? "techLeadPhoto" : "techLeadSign").value.trim();
+  const extras = coworkers[which];
+  const names = [lead].concat(extras).filter(n => n && n.trim());
+  if (names.length === 0) return "";
+  const slug = names.map(slugifyName_).filter(Boolean).join("-and-");
+  return slug;
+}
+
+function renderCoworkers_(which) {
+  const chipsEl = document.getElementById(which === "photo" ? "coworkerChipsPhoto" : "coworkerChipsSign");
+  chipsEl.innerHTML = coworkers[which].map((name, i) => `
+    <div class="chip">${escapeHTML_(name)}<button type="button" data-index="${i}" data-which="${which}">×</button></div>
+  `).join("");
+  chipsEl.querySelectorAll("button").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const w = btn.dataset.which;
+      const i = parseInt(btn.dataset.index, 10);
+      coworkers[w].splice(i, 1);
+      renderCoworkers_(w);
+      updateFolderPreviews();
+    });
+  });
+}
+
+function addCoworker_(which) {
+  const inputEl = document.getElementById(which === "photo" ? "coworkerInputPhoto" : "coworkerInputSign");
+  const name = inputEl.value.trim();
+  if (!name) return;
+  coworkers[which].push(name);
+  inputEl.value = "";
+  renderCoworkers_(which);
+  updateFolderPreviews();
+}
+
+document.getElementById("addCoworkerPhoto").addEventListener("click", () => addCoworker_("photo"));
+document.getElementById("addCoworkerSign").addEventListener("click",  () => addCoworker_("sign"));
+document.getElementById("coworkerInputPhoto").addEventListener("keydown", e => {
+  if (e.key === "Enter") { e.preventDefault(); addCoworker_("photo"); }
+});
+document.getElementById("coworkerInputSign").addEventListener("keydown", e => {
+  if (e.key === "Enter") { e.preventDefault(); addCoworker_("sign"); }
+});
 
 /* ============================================================
-   ADD NEW EQUIPMENT — with similar-item check
+   FOLDER PREVIEW (shows tech exactly where photos will go)
+   ============================================================ */
+function updateFolderPreviews() {
+  const preview = (which, modeLabel) => {
+    const el = document.getElementById(which === "photo" ? "folderPreviewPhoto" : "folderPreviewSign");
+    const tag = buildFolderTag_(which);
+    if (!tag) { el.classList.remove("show"); return; }
+    const folderName = which === "photo"
+      ? `${todayStr}_${getPtype_()}-${tag}`
+      : `${todayStr}_SIGNATURE-${tag}`;
+    el.classList.add("show");
+    el.innerHTML = `📁 Will save into: <code>${escapeHTML_(folderName)}</code>`;
+  };
+  preview("photo");
+  preview("sign");
+}
+
+function getPtype_() {
+  return document.querySelector('input[name="ptype"]:checked').value;
+}
+document.querySelectorAll('input[name="ptype"]').forEach(r => {
+  r.addEventListener("change", updateFolderPreviews);
+});
+
+/* ============================================================
+   ADD NEW EQUIPMENT
    ============================================================ */
 let pendingNewLabel = "";
+let pendingWhich = "photo";
 
-function openAddNew_(initialLabel) {
+function openAddNew_(initialLabel, which) {
+  pendingWhich = which || "photo";
   pendingNewLabel = (initialLabel || "").trim();
   if (!pendingNewLabel) {
     pendingNewLabel = prompt("Equipment name (make + model):");
@@ -416,7 +545,6 @@ function openAddNew_(initialLabel) {
     pendingNewLabel = pendingNewLabel.trim();
   }
 
-  // Find similar
   const words = pendingNewLabel.toLowerCase().split(/\s+/).filter(w => w.length >= 3);
   const similar = equipmentList.filter(e => {
     const hay = (e.label + " " + e.customer).toLowerCase();
@@ -440,16 +568,11 @@ function openAddNew_(initialLabel) {
     simList.querySelectorAll(".sim-item").forEach(el => {
       el.addEventListener("click", () => {
         document.getElementById("simModal").classList.remove("show");
-        // Use the existing one in the ACTIVE picker
-        const which = panS.classList.contains("active") ? "sign" : "photo";
-        chooseEquipment_(which, el.dataset.id);
-        // also clear the search inputs to avoid confusion
-        if (which === "photo") { /* already set by chooseEquipment_ */ }
+        chooseEquipment_(pendingWhich, el.dataset.id);
       });
     });
   } else {
-    // No similar — go straight to creation
-    confirmCreateNew_(pendingNewLabel);
+    confirmCreateNew_(pendingNewLabel, pendingWhich);
   }
 }
 
@@ -458,23 +581,19 @@ document.getElementById("simCancel").addEventListener("click", () => {
 });
 document.getElementById("simConfirm").addEventListener("click", () => {
   document.getElementById("simModal").classList.remove("show");
-  confirmCreateNew_(pendingNewLabel);
+  confirmCreateNew_(pendingNewLabel, pendingWhich);
 });
 
-async function confirmCreateNew_(label) {
+async function confirmCreateNew_(label, which) {
   const customer = prompt(
     "Customer / owner of this equipment (optional — leave blank if unknown).\n\n" +
     "You only type this ONCE, when the equipment is first added."
   );
-  if (customer === null) return; // cancelled
+  if (customer === null) return;
 
   const payload = { action: "addEquipment", label: label.trim(), customer: (customer || "").trim() };
 
   try {
-    // Use a query-string POST so we can read the response (avoids no-cors)
-    // Apps Script doPost works fine when called with text/plain + no preflight headers,
-    // but to read the response we need a CORS-enabled round-trip. Easiest trick:
-    // send via a hidden form or use fetch with no-cors and then refresh the list.
     await fetch(APPS_SCRIPT_URL, {
       method: "POST",
       mode: "no-cors",
@@ -482,15 +601,10 @@ async function confirmCreateNew_(label) {
       body: JSON.stringify(payload)
     });
 
-    // Give Sheets a moment, then refresh
     setTimeout(async () => {
       await loadEquipment();
-      // Try to auto-select the newly added one
       const found = equipmentList.find(e => e.label.toLowerCase() === label.toLowerCase());
-      if (found) {
-        const which = panS.classList.contains("active") ? "sign" : "photo";
-        chooseEquipment_(which, found.id);
-      }
+      if (found) chooseEquipment_(which, found.id);
       alert("✅ Equipment added. Everyone can now search for it.");
     }, 900);
 
@@ -524,11 +638,14 @@ function showPhotoStatus(msg, isErr=false){ statusPhotos.textContent = msg; stat
 document.getElementById("submitPhotos").addEventListener("click", async () => {
   const btn = document.getElementById("submitPhotos");
   const chosen = pickerState.photo.selected;
-  const ptype = document.querySelector('input[name="ptype"]:checked').value;
+  const ptype = getPtype_();
   const files = filesInput.files;
+  const lead = document.getElementById("techLeadPhoto").value.trim();
+  const extras = coworkers.photo.slice();
 
-  if (!chosen) { showPhotoStatus("❌ Search and pick the equipment first.", true); return; }
-  if (files.length === 0) { showPhotoStatus("❌ Add at least one photo.", true); return; }
+  if (!chosen)              { showPhotoStatus("❌ Search and pick the equipment first.", true); return; }
+  if (!lead)                { showPhotoStatus("❌ Enter your technician name.", true); return; }
+  if (files.length === 0)   { showPhotoStatus("❌ Add at least one photo.", true); return; }
 
   const fileData = await Promise.all(Array.from(files).map(f => new Promise(res => {
     const r = new FileReader();
@@ -541,6 +658,8 @@ document.getElementById("submitPhotos").addEventListener("click", async () => {
     equipId: chosen.id,
     ptype: ptype,
     date: todayStr,
+    techLead: lead,
+    coworkers: extras,
     files: fileData
   };
 
@@ -554,12 +673,13 @@ document.getElementById("submitPhotos").addEventListener("click", async () => {
       headers: { "Content-Type": "text/plain" },
       body: JSON.stringify(payload)
     });
-    showPhotoStatus("✅ Saved to " + chosen.id + " · " + ptype + " · " + todayStr);
+    const tag = buildFolderTag_("photo");
+    showPhotoStatus(`✅ Saved to ${chosen.id} · ${ptype} · ${todayStr}-${tag}`);
     filesInput.value = "";
     fileCount.textContent = "0";
     fileBtn.classList.remove("has-files");
     document.getElementById("fileLabel").textContent = "Tap to select photos";
-    // keep the chosen equipment selected for the next upload — saves time if tech is uploading multiple batches
+    // keep equipment + tech names for the next batch (common workflow)
   } catch (err) {
     console.error(err);
     showPhotoStatus("❌ Upload failed. Try again.", true);
@@ -570,33 +690,46 @@ document.getElementById("submitPhotos").addEventListener("click", async () => {
 });
 
 /* ============================================================
-   SIGN PANEL SUBMIT
+   SIGN PANEL SUBMIT  (fixed)
    ============================================================ */
 const canvas = document.getElementById("sig");
 const ctx = canvas.getContext("2d");
+
 function fitCanvas(){
   const r = canvas.getBoundingClientRect();
-  canvas.width = r.width; canvas.height = 140;
+  canvas.width = Math.max(r.width, 300);
+  canvas.height = 140;
   ctx.lineWidth = 3; ctx.lineCap = "round"; ctx.strokeStyle = "#0b1b2f";
-  ctx.fillStyle = "#fff"; ctx.fillRect(0,0,canvas.width,canvas.height);
+  ctx.fillStyle = "#fff"; ctx.fillRect(0, 0, canvas.width, canvas.height);
 }
 window.addEventListener("resize", fitCanvas);
-fitCanvas();
+window.addEventListener("load", fitCanvas);
+// give layout a tick to settle on mobile
+setTimeout(fitCanvas, 60);
 
-let drawing=false, lx=0, ly=0, signed=false;
+let drawing = false, lx = 0, ly = 0, signed = false;
 function pos(e){
   const r = canvas.getBoundingClientRect();
-  const sx = canvas.width/r.width, sy = canvas.height/r.height;
+  const sx = canvas.width / r.width, sy = canvas.height / r.height;
   const p = e.touches ? e.touches[0] : e;
-  return { x:(p.clientX-r.left)*sx, y:(p.clientY-r.top)*sy };
+  return { x: (p.clientX - r.left) * sx, y: (p.clientY - r.top) * sy };
 }
-function start(e){ e.preventDefault(); drawing=true; signed=true; const p=pos(e); lx=p.x; ly=p.y; }
-function move(e){ e.preventDefault(); if(!drawing)return; const p=pos(e); ctx.beginPath(); ctx.moveTo(lx,ly); ctx.lineTo(p.x,p.y); ctx.stroke(); lx=p.x; ly=p.y; }
-function stop(e){ e.preventDefault(); drawing=false; }
-canvas.addEventListener("mousedown",start); canvas.addEventListener("mousemove",move); canvas.addEventListener("mouseup",stop); canvas.addEventListener("mouseout",stop);
-canvas.addEventListener("touchstart",start,{passive:false}); canvas.addEventListener("touchmove",move,{passive:false}); canvas.addEventListener("touchend",stop);
+function start(e){ e.preventDefault(); drawing = true; signed = true; const p = pos(e); lx = p.x; ly = p.y; }
+function move(e){ e.preventDefault(); if (!drawing) return; const p = pos(e); ctx.beginPath(); ctx.moveTo(lx, ly); ctx.lineTo(p.x, p.y); ctx.stroke(); lx = p.x; ly = p.y; }
+function stop(e){ e.preventDefault(); drawing = false; }
+canvas.addEventListener("mousedown", start);
+canvas.addEventListener("mousemove", move);
+canvas.addEventListener("mouseup", stop);
+canvas.addEventListener("mouseout", stop);
+canvas.addEventListener("touchstart", start, { passive: false });
+canvas.addEventListener("touchmove",  move,  { passive: false });
+canvas.addEventListener("touchend",   stop);
+canvas.addEventListener("touchcancel",stop);
+
 document.getElementById("clearSig").addEventListener("click", () => {
-  ctx.fillStyle="#fff"; ctx.fillRect(0,0,canvas.width,canvas.height); signed=false;
+  ctx.fillStyle = "#fff";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  signed = false;
 });
 
 const statusSign = document.getElementById("statusSign");
@@ -604,16 +737,26 @@ function showSignStatus(msg, isErr=false){ statusSign.textContent = msg; statusS
 
 document.getElementById("submitSign").addEventListener("click", async () => {
   const btn = document.getElementById("submitSign");
-  const chosen = pickerState.sign.selected;
+  const chosen  = pickerState.sign.selected;
   const custName = document.getElementById("custName").value.trim();
-  const techName = document.getElementById("techSign").value.trim();
+  const lead     = document.getElementById("techLeadSign").value.trim();
+  const extras   = coworkers.sign.slice();
 
-  if (!chosen) { showSignStatus("❌ Search and pick the equipment first.", true); return; }
+  if (!chosen)   { showSignStatus("❌ Search and pick the equipment first.", true); return; }
   if (!custName) { showSignStatus("❌ Customer must print their name.", true); return; }
-  if (!signed) { showSignStatus("❌ Customer must sign in the box.", true); return; }
-  if (!techName) { showSignStatus("❌ Enter your technician name.", true); return; }
+  if (!signed)   { showSignStatus("❌ Customer must sign in the box.", true); return; }
+  if (!lead)     { showSignStatus("❌ Enter your technician name.", true); return; }
 
-  const sigData = canvas.toDataURL("image/png");
+  // Safely serialize the canvas. If toDataURL throws or returns a blank canvas, catch it.
+  let sigData;
+  try {
+    sigData = canvas.toDataURL("image/png");
+    if (!sigData || sigData.length < 100) throw new Error("Empty signature data");
+  } catch (err) {
+    console.error(err);
+    showSignStatus("❌ Signature couldn't be read. Try signing again.", true);
+    return;
+  }
 
   const payload = {
     action: "uploadSignature",
@@ -621,7 +764,8 @@ document.getElementById("submitSign").addEventListener("click", async () => {
     date: todayStr,
     customerName: custName,
     customerDate: document.getElementById("custDate").value,
-    tech: techName,
+    techLead: lead,
+    coworkers: extras,
     signature: sigData
   };
 
@@ -635,9 +779,14 @@ document.getElementById("submitSign").addEventListener("click", async () => {
       headers: { "Content-Type": "text/plain" },
       body: JSON.stringify(payload)
     });
-    showSignStatus("✅ Sign-off saved to " + chosen.id);
+    const tag = buildFolderTag_("sign");
+    showSignStatus(`✅ Sign-off saved to ${chosen.id} · ${todayStr}_SIGNATURE-${tag}`);
     document.getElementById("custName").value = "";
-    ctx.fillStyle="#fff"; ctx.fillRect(0,0,canvas.width,canvas.height); signed=false;
+    coworkers.sign = [];
+    renderCoworkers_("sign");
+    updateFolderPreviews();
+    ctx.fillStyle = "#fff"; ctx.fillRect(0, 0, canvas.width, canvas.height);
+    signed = false;
     clearChosen_("sign");
     searchSign.value = "";
   } catch (err) {
@@ -649,7 +798,7 @@ document.getElementById("submitSign").addEventListener("click", async () => {
   }
 });
 
-/* ---------- tiny helper ---------- */
+/* ---------- helpers ---------- */
 function escapeHTML_(s) {
   return String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]));
 }
